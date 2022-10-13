@@ -29,14 +29,6 @@ public class AccountTest {
         assertThat(account.overdraftFee(), is(0.20));
     }
 
-    @Test
-    public void testPrintCustomer() {
-        Account account = getNormalAccount();
-        Customer customer = new Person("xxx", "xxx", "xxx@mail.com", account);
-        account.setCustomer(customer);
-        assertThat(account.printCustomer(), is("xxx xxx@mail.com"));
-    }
-
     private Account getNormalAccount() {
         AccountType premium = new AccountType(false);
         return new Account(premium, 9);

@@ -76,10 +76,6 @@ public class Account {
         return type;
     }
 
-    public String printCustomer() {
-        return customer.getName() + " " + customer.getEmail();
-    }
-
     public String getCurrency() {
         return currency;
     }
@@ -110,5 +106,9 @@ public class Account {
 
     public String print() {
         return "Account: IBAN: " + getIban() + ", Money: " + getMoney() + ", Account type: " + getType();
+    }
+
+    public String daysOverdrawn() {
+        return customer.getCustomerFullName() + "Account: IBAN: " + getIban() + ", Days Overdrawn: " + getDaysOverdrawn();
     }
 }
