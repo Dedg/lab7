@@ -107,4 +107,21 @@ public class Account {
     public String daysOverdrawn() {
         return customer.getCustomerFullName() + "Account: IBAN: " + getIban() + ", Days Overdrawn: " + getDaysOverdrawn();
     }
+
+    public static class AccountType {
+        private boolean premium;
+
+        AccountType(boolean premium) {
+            this.premium = premium;
+        }
+
+        public boolean isPremium() {
+            return premium;
+        }
+
+        @Override
+        public String toString() {
+            return premium ? "premium" : "normal";
+        }
+    }
 }
