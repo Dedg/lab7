@@ -28,6 +28,10 @@ public class Customer {
         if (!account.getCurrency().equals(currency)) {
             throw new RuntimeException("Can't extract withdraw " + currency);
         }
+        updateAccountMoney(sum);
+    }
+
+    private void updateAccountMoney(double sum) {
         if (account.getType().isPremium()) {
             switch (customerType) {
                 case COMPANY:
