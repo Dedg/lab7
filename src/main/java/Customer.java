@@ -37,10 +37,6 @@ public abstract class Customer {
         return account.getType().isPremium() ? companyOverdraftDiscount / 2 : companyOverdraftDiscount;
     }
 
-    protected boolean isOverdraft() {
-        return account.getMoney() < 0;
-    }
-
     public String getName() {
         return name;
     }
@@ -71,13 +67,5 @@ public abstract class Customer {
 
     public String getCustomerFullName() {
         return name + " " + surname + " ";
-    }
-
-    protected double getRemainingMoney(double sum) {
-        return account.getMoney() - sum;
-    }
-
-    protected double getOverdraftAmount(double sum) {
-        return sum * account.overdraftFee();
     }
 }

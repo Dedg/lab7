@@ -15,9 +15,4 @@ public class PrintCustomerInfo {
         accountDescription += "Account: IBAN: " + customer.getAccount().getIban() + ", Money: " + customer.getAccount().getMoney();
         return customer.getCustomerFullName() + accountDescription;
     }
-
-    public String account() {
-        return "Account: IBAN: " + customer.getAccount().getIban() + ", Money: "
-                + customer.getAccount().getMoney() + ", Account type: " + customer.getAccount().getType();
-    }
 }

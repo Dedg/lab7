@@ -5,10 +5,6 @@ public class Person extends Customer {
 
     @Override
     void updateAccountMoney(double sum) {
-        if (isOverdraft()) {
-            getAccount().setMoney(getRemainingMoney(sum) - getOverdraftAmount(sum));
-        } else {
-            getAccount().setMoney(getRemainingMoney(sum));
-        }
+        getAccount().updateAccountMoney(sum, 1);
     }
 }

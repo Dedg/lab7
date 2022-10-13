@@ -86,15 +86,13 @@ public class CustomerTest {
     @Test
     public void testPrintCustomerAccountNormal() throws Exception {
         Customer customer = getPersonWithAccount(false);
-        PrintCustomerInfo printCustomerInfo = new PrintCustomerInfo(customer);
-        assertThat(printCustomerInfo.account(), is("Account: IBAN: RO023INGB434321431241, Money: 34.0, Account type: normal"));
+        assertThat(customer.getAccount().print(), is("Account: IBAN: RO023INGB434321431241, Money: 34.0, Account type: normal"));
     }
 
     @Test
     public void testPrintCustomerAccountPremium() throws Exception {
         Customer customer = getPersonWithAccount(true);
-        PrintCustomerInfo printCustomerInfo = new PrintCustomerInfo(customer);
-        assertThat(printCustomerInfo.account(), is("Account: IBAN: RO023INGB434321431241, Money: 34.0, Account type: premium"));
+        assertThat(customer.getAccount().print(), is("Account: IBAN: RO023INGB434321431241, Money: 34.0, Account type: premium"));
     }
 
     private Customer getPersonWithAccount(boolean premium) {

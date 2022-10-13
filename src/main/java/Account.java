@@ -44,7 +44,6 @@ public class Account {
         }
     }
 
-
     public int getDaysOverdrawn() {
         return daysOverdrawn;
     }
@@ -87,5 +86,29 @@ public class Account {
 
     public void setCurrency(String currency) {
         this.currency = currency;
+    }
+
+    public double getRemainingMoney(double sum) {
+        return getMoney() - sum;
+    }
+
+    public double getOverdraftAmount(double sum) {
+        return sum * overdraftFee();
+    }
+
+    public boolean isOverdraft() {
+        return getMoney() < 0;
+    }
+
+    void updateAccountMoney(double sum, double discountFactor) {
+        if (isOverdraft()) {
+            setMoney(getRemainingMoney(sum) - getOverdraftAmount(sum) * discountFactor);
+        } else {
+            setMoney(getRemainingMoney(sum));
+        }
+    }
+
+    public String print() {
+        return "Account: IBAN: " + getIban() + ", Money: " + getMoney() + ", Account type: " + getType();
     }
 }
