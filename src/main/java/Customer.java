@@ -1,4 +1,4 @@
-public class Customer {
+public abstract class Customer {
 
     private String name;
     private String surname;
@@ -31,30 +31,13 @@ public class Customer {
         updateAccountMoney(sum);
     }
 
-    private void updateAccountMoney(double sum) {
-        switch (customerType) {
-            case COMPANY:
-                if (isOverdraft()) {
-                    account.setMoney(getRemainingMoney(sum) - getOverdraftAmount(sum) * getCompanyOverdraftPercentDiscount());
-                } else {
-                    account.setMoney(getRemainingMoney(sum));
-                }
-                break;
-            case PERSON:
-                if (isOverdraft()) {
-                    account.setMoney(getRemainingMoney(sum) - getOverdraftAmount(sum));
-                } else {
-                    account.setMoney(getRemainingMoney(sum));
-                }
-                break;
-        }
-    }
+    abstract void updateAccountMoney(double sum);
 
-    private double getCompanyOverdraftPercentDiscount() {
+    protected double getCompanyOverdraftPercentDiscount() {
         return account.getType().isPremium() ? companyOverdraftDiscount / 2 : companyOverdraftDiscount;
     }
 
-    private boolean isOverdraft() {
+    protected boolean isOverdraft() {
         return account.getMoney() < 0;
     }
 
@@ -90,11 +73,11 @@ public class Customer {
         return name + " " + surname + " ";
     }
 
-    private double getRemainingMoney(double sum) {
+    protected double getRemainingMoney(double sum) {
         return account.getMoney() - sum;
     }
 
-    private double getOverdraftAmount(double sum) {
+    protected double getOverdraftAmount(double sum) {
         return sum * account.overdraftFee();
     }
 }
