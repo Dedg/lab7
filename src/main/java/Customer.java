@@ -99,23 +99,11 @@ public class Customer {
         this.customerType = customerType;
     }
 
-    public String printCustomerDaysOverdrawn() {
-        String accountDescription = "Account: IBAN: " + account.getIban() + ", Days Overdrawn: " + account.getDaysOverdrawn();
-        return getCustomerFullName() + accountDescription;
+    public Account getAccount() {
+        return account;
     }
 
-    public String printCustomerMoney() {
-        String accountDescription = "";
-        accountDescription += "Account: IBAN: " + account.getIban() + ", Money: " + account.getMoney();
-        return getCustomerFullName() + accountDescription;
-    }
-
-    public String printCustomerAccount() {
-        return "Account: IBAN: " + account.getIban() + ", Money: "
-                + account.getMoney() + ", Account type: " + account.getType();
-    }
-
-    private String getCustomerFullName() {
+    public String getCustomerFullName() {
         return name + " " + surname + " ";
     }
 

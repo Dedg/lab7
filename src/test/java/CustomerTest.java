@@ -72,25 +72,29 @@ public class CustomerTest {
     @Test
     public void testPrintCustomerDaysOverdrawn() throws Exception {
         Customer customer = getPersonWithAccount(false);
-        assertThat(customer.printCustomerDaysOverdrawn(), is("danix dan Account: IBAN: RO023INGB434321431241, Days Overdrawn: 9"));
+        PrintCustomerInfo printCustomerInfo = new PrintCustomerInfo(customer);
+        assertThat(printCustomerInfo.daysOverdrawn(), is("danix dan Account: IBAN: RO023INGB434321431241, Days Overdrawn: 9"));
     }
 
     @Test
     public void testPrintCustomerMoney() throws Exception {
         Customer customer = getPersonWithAccount(false);
-        assertThat(customer.printCustomerMoney(), is("danix dan Account: IBAN: RO023INGB434321431241, Money: 34.0"));
+        PrintCustomerInfo printCustomerInfo = new PrintCustomerInfo(customer);
+        assertThat(printCustomerInfo.money(), is("danix dan Account: IBAN: RO023INGB434321431241, Money: 34.0"));
     }
 
     @Test
     public void testPrintCustomerAccountNormal() throws Exception {
         Customer customer = getPersonWithAccount(false);
-        assertThat(customer.printCustomerAccount(), is("Account: IBAN: RO023INGB434321431241, Money: 34.0, Account type: normal"));
+        PrintCustomerInfo printCustomerInfo = new PrintCustomerInfo(customer);
+        assertThat(printCustomerInfo.account(), is("Account: IBAN: RO023INGB434321431241, Money: 34.0, Account type: normal"));
     }
 
     @Test
     public void testPrintCustomerAccountPremium() throws Exception {
         Customer customer = getPersonWithAccount(true);
-        assertThat(customer.printCustomerAccount(), is("Account: IBAN: RO023INGB434321431241, Money: 34.0, Account type: premium"));
+        PrintCustomerInfo printCustomerInfo = new PrintCustomerInfo(customer);
+        assertThat(printCustomerInfo.account(), is("Account: IBAN: RO023INGB434321431241, Money: 34.0, Account type: premium"));
     }
 
     private Customer getPersonWithAccount(boolean premium) {
