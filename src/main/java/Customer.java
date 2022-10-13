@@ -32,47 +32,30 @@ public class Customer {
     }
 
     private void updateAccountMoney(double sum) {
-        if (account.getType().isPremium()) {
-            switch (customerType) {
-                case COMPANY:
-                    // we are in overdraft
-                    if (account.getMoney() < 0) {
-                        // 50 percent discount for overdraft for premium account
-                        account.setMoney(getRemainingMoney(sum) - getOverdraftAmount(sum) * companyOverdraftDiscount / 2);
-                    } else {
-                        account.setMoney(getRemainingMoney(sum));
-                    }
-                    break;
-                case PERSON:
-                    // we are in overdraft
-                    if (account.getMoney() < 0) {
-                        account.setMoney(getRemainingMoney(sum) - getOverdraftAmount(sum));
-                    } else {
-                        account.setMoney(getRemainingMoney(sum));
-                    }
-                    break;
-            }
-        } else {
-            switch (customerType) {
-                case COMPANY:
-                    // we are in overdraft
-                    if (account.getMoney() < 0) {
-                        // no discount for overdraft for not premium account
-                        account.setMoney(getRemainingMoney(sum) - getOverdraftAmount(sum) * companyOverdraftDiscount);
-                    } else {
-                        account.setMoney(getRemainingMoney(sum));
-                    }
-                    break;
-                case PERSON:
-                    // we are in overdraft
-                    if (account.getMoney() < 0) {
-                        account.setMoney(getRemainingMoney(sum) - getOverdraftAmount(sum));
-                    } else {
-                        account.setMoney(getRemainingMoney(sum));
-                    }
-                    break;
-            }
+        switch (customerType) {
+            case COMPANY:
+                if (isOverdraft()) {
+                    account.setMoney(getRemainingMoney(sum) - getOverdraftAmount(sum) * getCompanyOverdraftPercentDiscount());
+                } else {
+                    account.setMoney(getRemainingMoney(sum));
+                }
+                break;
+            case PERSON:
+                if (isOverdraft()) {
+                    account.setMoney(getRemainingMoney(sum) - getOverdraftAmount(sum));
+                } else {
+                    account.setMoney(getRemainingMoney(sum));
+                }
+                break;
         }
+    }
+
+    private double getCompanyOverdraftPercentDiscount() {
+        return account.getType().isPremium() ? companyOverdraftDiscount / 2 : companyOverdraftDiscount;
+    }
+
+    private boolean isOverdraft() {
+        return account.getMoney() < 0;
     }
 
     public String getName() {
